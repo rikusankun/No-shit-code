@@ -83,6 +83,7 @@
     .card:nth-child(3) { transform: rotate(-0.6deg); animation: rise-3 0.8s ease-in-out backwards; animation-delay: 0.24s; }
     .card:nth-child(4) { transform: rotate(1deg); animation: rise-4 0.8s ease-in-out backwards; animation-delay: 0.32s; }
     .card:nth-child(5) { transform: rotate(-0.8deg); animation: rise-5 0.8s ease-in-out backwards; animation-delay: 0.4s; }
+    .card:nth-child(6) { transform: rotate(0.6deg); animation: rise-6 0.8s ease-in-out backwards; animation-delay: 0.48s; }
 
     @keyframes rise-1 {
       from { opacity: 0; transform: translateY(8px) rotate(-1.2deg); }
@@ -104,6 +105,10 @@
       from { opacity: 0; transform: translateY(8px) rotate(-0.8deg); }
       to { opacity: 1; transform: translateY(0) rotate(-0.8deg); }
     }
+    @keyframes rise-6 {
+      from { opacity: 0; transform: translateY(8px) rotate(0.6deg); }
+      to { opacity: 1; transform: translateY(0) rotate(0.6deg); }
+    }
 
     .card:nth-child(1):hover,
     .card:nth-child(1):focus-visible { transform: translateY(-4px) rotate(-1.2deg); }
@@ -115,6 +120,8 @@
     .card:nth-child(4):focus-visible { transform: translateY(-4px) rotate(1deg); }
     .card:nth-child(5):hover,
     .card:nth-child(5):focus-visible { transform: translateY(-4px) rotate(-0.8deg); }
+    .card:nth-child(6):hover,
+    .card:nth-child(6):focus-visible { transform: translateY(-4px) rotate(0.6deg); }
 
     .card:hover,
     .card:focus-visible {
@@ -193,30 +200,35 @@
     </header>
 
     <section class="cards">
-      <a class="card" href="01-底线与通用.md">
+      <a class="card" href="rules/01-底线与通用.md">
         <span class="num">01</span>
         <span class="name">底线与通用</span>
         <span class="line">没点头，禁止写代码。</span>
       </a>
-      <a class="card" href="02-前端与气质.md">
+      <a class="card" href="rules/02-前端与气质.md">
         <span class="num">02</span>
         <span class="name">前端与气质</span>
         <span class="line">禁止白屏。</span>
       </a>
-      <a class="card" href="03-后端与数据.md">
+      <a class="card" href="rules/03-Python专属.md">
         <span class="num">03</span>
-        <span class="name">后端与数据</span>
-        <span class="line">禁止一句话删掉整个仓库。</span>
+        <span class="name">Python 专属</span>
+        <span class="line">禁止直接闪退。</span>
       </a>
-      <a class="card" href="04-Rust专属.md">
+      <a class="card" href="rules/04-Rust专属.md">
         <span class="num">04</span>
         <span class="name">Rust 专属</span>
         <span class="line">禁止把报错藏起来。</span>
       </a>
-      <a class="card" href="05-管理动作.md">
+      <a class="card" href="rules/05-管理动作.md">
         <span class="num">05</span>
         <span class="name">管理动作</span>
         <span class="line">一个功能，一个新对话。</span>
+      </a>
+      <a class="card" href="rules/06-后端与数据.md">
+        <span class="num">06</span>
+        <span class="name">后端与数据</span>
+        <span class="line">禁止一句话删掉整个仓库。</span>
       </a>
     </section>
 
