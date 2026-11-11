@@ -1,0 +1,35 @@
+name: 发布网页 # 给这套自动流程起个能看懂的名字
+
+on: # 规定什么时候开始干活
+  push: # 有人把新代码推进仓库时
+    branches: # 只看这些分支
+      - main # 只听 main 分支，别的分支推上来不管
+  workflow_dispatch: # 也允许你在网页上的 Actions 里手动再跑一次
+
+permissions: # 这台临时电脑只被允许做这三件事
+  contents: read # 允许把仓库里的文件读出来
+  pages: write # 允许把网页发布到 GitHub Pages
+  id-token: write # 允许它证明自己是这个仓库，不是外人
+
+concurrency: # 同一种发布不要挤成一堆同时跑
+  group: "pages" # 这些发布排在同一个队里
+  cancel-in-progress: false # 正在发布的那次不许中途掐掉，避免网站发到一半坏掉
+
+jobs: # 下面是真正要干的活
+  deploy: # 这一份活的名字：发布
+    environment: # 发布到 GitHub 专门的网页环境
+      name: github-pages # 环境名字必须叫这个，这是官方规定的
+      url: ${{ steps.deployment.outputs.page_url }} # 发布成功后，把网站地址记在这次运行的结果里
+    runs-on: ubuntu-latest # 用一台官方提供的临时 Linux 电脑来干
+    steps: # 按顺序做下面几步
+      - name: 取出代码 # 这一步的名字
+        uses: actions/checkout@v4 # 把仓库里的文件下载到这台临时电脑
+      - name: 准备网页发布 # 这一步的名字
+        uses: actions/configure-pages@v5 # 告诉 GitHub Pages：这是一个不用编译的静态网站
+      - name: 打包网站 # 这一步的名字
+        uses: actions/upload-pages-artifact@v3 # 把要发布的文件打成一个包交上去
+        with: # 打包时的设置
+          path: "." # 仓库根目录就是网站，打开就能看到 index.html
+      - name: 发布到网页 # 这一步的名字
+        id: deployment # 给这一步起个编号，上面才能拿到网站地址
+        uses: actions/deploy-pages@v5 # 把包真正发到 GitHub Pages
