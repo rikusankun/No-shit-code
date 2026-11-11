@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plain-Code规则集</title>
+  <style>
+    /* 手账配色：浅灰绿底、奶油纸、抹茶绿字、胡萝卜橙只做一小点。 */
+    body {
+      margin: 0;
+      background: #e3ebe4;
+      color: #3f4a43;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 64px 32px 72px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      color: #7fa08b;
+      font-family: KaiTi, STKaiti, "楷体", serif;
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 600;
+      animation: rise 0.8s ease-in-out backwards;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .subtitle,
+    .who {
+      margin: 16px 0 0;
+      color: #5e6862;
+    }
+
+    .who a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .who a:hover {
+      text-decoration: underline;
+    }
+
+    .cards {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      text-align: left;
+    }
+
+    .card {
+      display: block;
+      padding: 32px;
+      background: #fdfcf8;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+      color: inherit;
+      text-decoration: none;
+      transition: transform 0.4s ease-in-out, box-shadow 0.4s ease-in-out, border-radius 0.4s ease-in-out;
+    }
+
+    /* 入场结束后动画放开 transform，悬停才能在原来的歪斜上再抬 4px。 */
+    .card:nth-child(1) { transform: rotate(-1.2deg); animation: rise-1 0.8s ease-in-out backwards; animation-delay: 0.08s; }
+    .card:nth-child(2) { transform: rotate(0.8deg); animation: rise-2 0.8s ease-in-out backwards; animation-delay: 0.16s; }
+    .card:nth-child(3) { transform: rotate(-0.6deg); animation: rise-3 0.8s ease-in-out backwards; animation-delay: 0.24s; }
+    .card:nth-child(4) { transform: rotate(1deg); animation: rise-4 0.8s ease-in-out backwards; animation-delay: 0.32s; }
+    .card:nth-child(5) { transform: rotate(-0.8deg); animation: rise-5 0.8s ease-in-out backwards; animation-delay: 0.4s; }
+
+    @keyframes rise-1 {
+      from { opacity: 0; transform: translateY(8px) rotate(-1.2deg); }
+      to { opacity: 1; transform: translateY(0) rotate(-1.2deg); }
+    }
+    @keyframes rise-2 {
+      from { opacity: 0; transform: translateY(8px) rotate(0.8deg); }
+      to { opacity: 1; transform: translateY(0) rotate(0.8deg); }
+    }
+    @keyframes rise-3 {
+      from { opacity: 0; transform: translateY(8px) rotate(-0.6deg); }
+      to { opacity: 1; transform: translateY(0) rotate(-0.6deg); }
+    }
+    @keyframes rise-4 {
+      from { opacity: 0; transform: translateY(8px) rotate(1deg); }
+      to { opacity: 1; transform: translateY(0) rotate(1deg); }
+    }
+    @keyframes rise-5 {
+      from { opacity: 0; transform: translateY(8px) rotate(-0.8deg); }
+      to { opacity: 1; transform: translateY(0) rotate(-0.8deg); }
+    }
+
+    .card:nth-child(1):hover,
+    .card:nth-child(1):focus-visible { transform: translateY(-4px) rotate(-1.2deg); }
+    .card:nth-child(2):hover,
+    .card:nth-child(2):focus-visible { transform: translateY(-4px) rotate(0.8deg); }
+    .card:nth-child(3):hover,
+    .card:nth-child(3):focus-visible { transform: translateY(-4px) rotate(-0.6deg); }
+    .card:nth-child(4):hover,
+    .card:nth-child(4):focus-visible { transform: translateY(-4px) rotate(1deg); }
+    .card:nth-child(5):hover,
+    .card:nth-child(5):focus-visible { transform: translateY(-4px) rotate(-0.8deg); }
+
+    .card:hover,
+    .card:focus-visible {
+      border-radius: 20px;
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.06);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid #7fa08b;
+      outline-offset: 4px;
+    }
+
+    .num {
+      display: block;
+      color: #7fa08b;
+      font-weight: 600;
+    }
+
+    .name {
+      display: block;
+      margin-top: 8px;
+      font-size: 16px;
+      line-height: 24px;
+      font-weight: 600;
+    }
+
+    .line {
+      display: block;
+      margin-top: 8px;
+    }
+
+    footer {
+      margin-top: 48px;
+      color: #5e6862;
+    }
+
+    code {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    .rabbit {
+      position: fixed;
+      right: 32px;
+      bottom: 32px;
+      margin: 0;
+      color: #e88c69;
+      font-family: KaiTi, STKaiti, "楷体", serif;
+      animation: breathe 3s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+      0%,
+      100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      h1,
+      .card,
+      .rabbit {
+        animation: none;
+      }
+
+      .card {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Plain-Code规则集</h1>
+      <p class="subtitle">一个不懂代码的老板，用来管住 AI 的施工手册。</p>
+      <p class="who">陆山君 · <a href="https://github.com/rikusankun">rikusankun</a></p>
+    </header>
+
+    <section class="cards">
+      <a class="card" href="01-底线与通用.md">
+        <span class="num">01</span>
+        <span class="name">底线与通用</span>
+        <span class="line">没点头，禁止写代码。</span>
+      </a>
+      <a class="card" href="02-前端与气质.md">
+        <span class="num">02</span>
+        <span class="name">前端与气质</span>
+        <span class="line">禁止白屏。</span>
+      </a>
+      <a class="card" href="03-后端与数据.md">
+        <span class="num">03</span>
+        <span class="name">后端与数据</span>
+        <span class="line">禁止一句话删掉整个仓库。</span>
+      </a>
+      <a class="card" href="04-Rust专属.md">
+        <span class="num">04</span>
+        <span class="name">Rust 专属</span>
+        <span class="line">禁止把报错藏起来。</span>
+      </a>
+      <a class="card" href="05-管理动作.md">
+        <span class="num">05</span>
+        <span class="name">管理动作</span>
+        <span class="line">一个功能，一个新对话。</span>
+      </a>
+    </section>
+
+    <footer>
+      <p>新对话第一句发 <code>@Plain-Code 读我的规矩</code>。</p>
+    </footer>
+  </main>
+  <p class="rabbit">[手绘小兔子]</p>
+</body>
+</html>
